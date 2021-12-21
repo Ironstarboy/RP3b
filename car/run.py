@@ -31,26 +31,21 @@ dis=threading.Thread(target=distance)
 dis.start()
 
 angel=0
-count=0 #转向次数，多次转不出来就后退
+count=0
+# 右边轮子动力不足
 while 1:
     move.forward(10,d)
-    print(d)
     if d < 15:
-        print(d)
-        if angel < 180:
+        if 0<angel<180 :
             angel += 30
             count+=1
             move.turnLeft()
-        else:
+        if angel==180:
+            angel=360
+        if 180<angel<360:
             angel -= 30
             count+=1
             move.turnRight()
-        if count>10:
-            #　进入死角　后退并转弯
-            move.backward(speed=10,t=2)
-            move.turnRight()
-            angel-=30
-            count=0
 
 
 
