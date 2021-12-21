@@ -29,21 +29,23 @@ def left(speed,reverse=0):
 
 
 
-def forward(speed,t=-1):
+def forward(speed,d):
     l_speed.stop()
     r_speed.stop()
 
     right(speed)
     left(speed)
-    if t==-1:
-        t=999999
-    time.sleep(t)
-    l_speed.stop()
-    r_speed.stop()
+    if (d < 15):
+        stop()
+    # if t==-1:
+    #     t=999999
+    # time.sleep(t)
+    # l_speed.stop()
+    # r_speed.stop()
 
 
 
-def backward(speed,t=-1):
+def backward(speed,t):
     l_speed.stop()
     r_speed.stop()
 
@@ -55,23 +57,26 @@ def backward(speed,t=-1):
     l_speed.stop()
     r_speed.stop()
 
-def turnRight(speed):
-    right(speed)
-    left(speed*1.3+10)
+def turnRight():
+    right(10,1)
+    left(10)
 
-    time.sleep(1)
+    time.sleep(0.3)
     l_speed.stop()
     r_speed.stop()
 
-def turnLeft(speed):
-    right(speed*1.2+10)
-    left(speed)
+def turnLeft():
+    right(10)
+    left(10,1)
 
-    time.sleep(1)
+    time.sleep(0.35)
     l_speed.stop()
     r_speed.stop()
 
-
+def stop():
+    # 立刻停下
+    l_speed.stop()
+    r_speed.stop()
 
 
 
