@@ -40,7 +40,7 @@ while True:
      right=sum(d[3:])
 
      if(left<right):
-          move.turnright
+          move.turnright()
           print('left')
      else:
           move.right()

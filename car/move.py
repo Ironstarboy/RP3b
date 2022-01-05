@@ -1,5 +1,7 @@
 import RPi.GPIO as GPIO
 import time
+import random
+
 l1 = 12
 l2 = 13
 l_control = 6
@@ -29,19 +31,12 @@ def left(speed,reverse=0):
 
 
 
-def forward(speed,d):
-    l_speed.stop()
-    r_speed.stop()
+def forward(speed):
+    # l_speed.stop()
+    # r_speed.stop()
 
     right(speed)
     left(speed)
-    if (d < 15):
-        stop()
-    # if t==-1:
-    #     t=999999
-    # time.sleep(t)
-    # l_speed.stop()
-    # r_speed.stop()
 
 
 
@@ -57,17 +52,19 @@ def backward(speed,t):
     l_speed.stop()
     r_speed.stop()
 
-def turnRight():
-    right(10,1)
-    left(10)
+
+def turnRight(speed=10):
+    right(speed,1)
+    left(speed)
 
     time.sleep(0.3)
     l_speed.stop()
     r_speed.stop()
 
-def turnLeft():
-    right(10)
-    left(10,1)
+
+def turnLeft(speed=10):
+    right(speed)
+    left(speed,1)
 
     time.sleep(0.35)
     l_speed.stop()
@@ -78,5 +75,20 @@ def stop():
     l_speed.stop()
     r_speed.stop()
 
+def AIturn(speed,d,Rd,Ld,danger_d):
+
+    if d<danger_d or (Rd==0 and Ld==0):
+        choice = random.randint(0, 1)
+        if choice:
+            turnLeft(speed)
+        else:
+            turnRight(speed)
+    if d<danger_d or Rd==1 and Ld==0:
+        # 左侧有东西
+        turnRight(speed)
+        print('Right!')
+    if d<danger_d or Rd==0 and Ld==1:
+        turnLeft(speed)
+        print('Left!')
 
 

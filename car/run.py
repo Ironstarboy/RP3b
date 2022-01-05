@@ -1,58 +1,26 @@
 import move
-
+import buzzer
 import time
 import threading
 import LED
 import RPi.GPIO as GPIO
-from concurrent.futures import ThreadPoolExecutor
+import sonic
+import global_var
+import light
 
-d=100
 
-GPIO.setmode(GPIO.BCM)  # GPIO.BOARD
-Trig=22  # tirg links out
-Echo=27  # echo links in
-GPIO.setup(Trig,GPIO.OUT)
-GPIO.setup(Echo,GPIO.IN)
-def distance():
-    global d
-    while 1:
-        GPIO.output(Trig,GPIO.HIGH)
-        time.sleep(0.1) # sleep时间太短，d一直是同一个数字
-        GPIO.output(Trig,GPIO.LOW)
-        while GPIO.input(Echo)==GPIO.LOW:
-            pass
-        t1=time.time()
-        while GPIO.input(Echo) == GPIO.HIGH:
-            pass
-        t2=time.time()
-        d=(t2-t1)*34000/2
+danger_d=15 # 单位厘米，距离内蜂鸣+转弯
 
-dis=threading.Thread(target=distance)
-dis.start()
+threading.Thread(target=sonic.distance).start()
+# threading.Thread(target=buzzer.ring).start()  # args=(danger_d,0.5)
+threading.Thread(target=light.detect).start()
+# threading.Thread(target=LED.run)
+# GPIO.output(4,0)#ctrl c退出，会导致ring没来得及执行变成低电平
 
-angel=0
-count=0
-# 右边轮子动力不足
+
 while 1:
-    move.forward(10,d)
-    if d < 15:
-        if 0<angel<180 :
-            angel += 30
-            count+=1
-            move.turnLeft()
-        if angel==180:
-            angel=360
-        if 180<angel<360:
-            angel -= 30
-            count+=1
-            move.turnRight()
-
-
-
-
-
-
-
-
-
-
+    d = global_var.get('d')  # 不停读取正前方距离d
+    R_detected = global_var.get('Rd')  # Rd=0即右前方有东西
+    L_detected = global_var.get('Ld')
+    move.forward(10)
+    move.AIturn(10,d,R_detected,L_detected,danger_d)
