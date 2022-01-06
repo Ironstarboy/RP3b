@@ -15,5 +15,5 @@ def detect():
     while 1:
         global_var.set('Rd',GPIO.input(R))
         global_var.set('Ld', GPIO.input(L))
-        time.sleep(0.1)
+        time.sleep(0.08)
 

@@ -6,7 +6,7 @@ l1 = 12
 l2 = 13
 l_control = 6
 
-r1=20# pwr指示灯那边
+r1=20# pwr指示灯那边,右侧
 r2=21
 r_control=26
 GPIO.setmode(GPIO.BCM)
@@ -32,10 +32,8 @@ def left(speed,reverse=0):
 
 
 def forward(speed):
-    # l_speed.stop()
-    # r_speed.stop()
     # 右边轮子动力好像差一点
-    right(speed+2)
+    right(speed)
     left(speed)
 
 
@@ -91,6 +89,7 @@ def AIturn(speed,d,Rd,Ld,danger_d):
         print('turnLeft!')
 
 def readSpeed():
+    # 用于运行时修改车速
     while 1:
         s=int(input())
         if 0<=s<=100:

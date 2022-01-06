@@ -23,8 +23,10 @@ threading.Thread(target=move.readSpeed).start()  # 运行中改变次小车速�
 def run():
     if global_var.get('buzzer_switch'):
         buz.start()
+        print('buzzer on!')
     if global_var.get('led_switch'):
         led.start()
+        print('led on!')
     while 1:
         d = global_var.get('d')  # 不停读取正前方距离d
         R_detected = global_var.get('Rd')  # Rd=0即右前方有东西

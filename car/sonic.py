@@ -10,7 +10,7 @@ GPIO.setup(Echo,GPIO.IN)
 def distance():
     while 1:
         GPIO.output(Trig,GPIO.HIGH)
-        time.sleep(0.1) # sleep时间太短，d一直是同一个数字
+        time.sleep(0.08) # sleep时间太短，d一直是同一个数字
         GPIO.output(Trig,GPIO.LOW)
         while GPIO.input(Echo)==GPIO.LOW:
             pass
