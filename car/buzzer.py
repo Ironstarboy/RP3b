@@ -17,4 +17,6 @@ def ring(danger_d=15,t=0.1):
             time.sleep(t)
             GPIO.output(buzzer,0)
 
-
+def slience():
+    GPIO.output(buzzer, 0)
+    print('buzzer off')

@@ -3,7 +3,11 @@
 '''
 
 global _global_dict
-_global_dict = {'d':100}
+_global_dict = {'d':100,
+                'speed':10,
+                'buzzer_switch':0,
+                'led_switch':0
+                }
 
 
 def set(key, value):
@@ -12,3 +16,6 @@ def set(key, value):
 
 def get(key):
     return _global_dict.get(key,None)
+
+def get_items():
+    return _global_dict.items()

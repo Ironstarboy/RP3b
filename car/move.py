@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import random
-
+import global_var
 l1 = 12
 l2 = 13
 l_control = 6
@@ -34,8 +34,8 @@ def left(speed,reverse=0):
 def forward(speed):
     # l_speed.stop()
     # r_speed.stop()
-
-    right(speed)
+    # 右边轮子动力好像差一点
+    right(speed+2)
     left(speed)
 
 
@@ -76,19 +76,23 @@ def stop():
     r_speed.stop()
 
 def AIturn(speed,d,Rd,Ld,danger_d):
-
     if d<danger_d or (Rd==0 and Ld==0):
         choice = random.randint(0, 1)
         if choice:
             turnLeft(speed)
         else:
             turnRight(speed)
-    if d<danger_d or Rd==1 and Ld==0:
+    if d<danger_d or (Rd==1 and Ld==0):
         # 左侧有东西
         turnRight(speed)
-        print('Right!')
-    if d<danger_d or Rd==0 and Ld==1:
+        print('turnRight!')
+    if d<danger_d or (Rd==0 and Ld==1):
         turnLeft(speed)
-        print('Left!')
+        print('turnLeft!')
 
+def readSpeed():
+    while 1:
+        s=int(input())
+        if 0<=s<=100:
+            global_var.set('speed',s)
 
