@@ -83,10 +83,10 @@ def AIturn(speed,d,Rd,Ld,danger_d):
     if d<danger_d or (Rd==1 and Ld==0):
         # 左侧有东西
         turnRight(speed)
-        print('turnRight!')
+        # print('turnRight!')
     if d<danger_d or (Rd==0 and Ld==1):
         turnLeft(speed)
-        print('turnLeft!')
+        # print('turnLeft!')
 
 def readSpeed():
     # 用于运行时修改车速

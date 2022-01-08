@@ -11,7 +11,7 @@ import buzzer
 parser = argparse.ArgumentParser(description='car control')
 parser.add_argument('-s','--speed',type=int,default=10,help="set inital car speed")
 parser.add_argument('-l','--led',default=0,help='set led on or off')
-parser.add_argument('-b','--buzzer',default=0,help='set buzzer on or off')
+parser.add_argument('-b','--buzzer',default=1,help='set buzzer on or off')
 args = parser.parse_args()
 
 if args.led:
