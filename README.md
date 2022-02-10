@@ -17,3 +17,13 @@
 
 -l 是彩灯LED，1代表开启。默认是0，即关闭。
 
+# 视频演示
+
+<iframe src="//player.bilibili.com/player.html?aid=636389729&bvid=BV14b4y177gK&cid=505585171&page=1" width="700px"  height="500px" runat="server"></iframe>
+
+
+
+
+
+[偶然发现的大佬源码](https://github.com/XPengZhao/rpi-alphabot2)
+
